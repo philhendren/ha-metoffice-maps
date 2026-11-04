@@ -1,0 +1,1053 @@
+{
+ "orderDetails": {
+  "order": {
+   "orderId": "o000000000001",
+   "name": "O000000000001",
+   "modelId": "mo-uk-mimg",
+   "format": "PNG",
+   "productType": "MAP_IMAGES"
+  },
+  "files": [
+   {
+    "fileId": "cloud_amount_total_ts0_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "cloud_amount_total_ts0_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "cloud_amount_total_ts1_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "cloud_amount_total_ts1_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts0_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts0_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts1_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts1_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts2_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts2_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts3_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts3_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts4_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts4_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts5_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts5_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts6_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts6_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts7_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts7_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts8_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts8_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts9_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts9_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts10_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts10_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts11_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts11_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts12_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts12_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts13_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts13_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts14_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts14_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts15_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts15_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts16_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts16_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts17_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts17_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts18_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts18_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts19_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts19_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts20_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts20_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts21_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts21_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts22_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts22_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts23_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts23_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts24_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts24_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts0_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts0_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts1_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts1_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts2_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts2_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts3_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts3_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts4_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts4_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts5_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts5_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts6_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts6_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts7_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts7_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts8_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts8_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts9_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts9_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts10_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts10_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts11_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts11_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts12_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts12_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts13_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts13_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts14_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts14_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts15_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts15_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts16_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts16_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts17_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts17_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts18_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts18_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts19_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts19_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts20_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts20_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts21_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts21_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts22_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts22_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts23_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts23_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts24_+00",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "land_cover_ts24_2026110400",
+    "runDateTime": "2026-11-04T00:00:00Z",
+    "run": "00"
+   },
+   {
+    "fileId": "cloud_amount_total_ts0_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "cloud_amount_total_ts0_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "cloud_amount_total_ts1_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "cloud_amount_total_ts1_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts0_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts0_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts1_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts1_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts2_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts2_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts3_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts3_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts4_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts4_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts5_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts5_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts6_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts6_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts7_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts7_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts8_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts8_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts9_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts9_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts10_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts10_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts11_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts11_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts12_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts12_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts13_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts13_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts14_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts14_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts15_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts15_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts16_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts16_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts17_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts17_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts18_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts18_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts19_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts19_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts20_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts20_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts21_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts21_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts22_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts22_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts23_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts23_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts24_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "total_precipitation_rate_ts24_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts0_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts0_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts1_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts1_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts2_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts2_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts3_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts3_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts4_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts4_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts5_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts5_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts6_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts6_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts7_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts7_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts8_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts8_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts9_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts9_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts10_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts10_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts11_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts11_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts12_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts12_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts13_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts13_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts14_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts14_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts15_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts15_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts16_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts16_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts17_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts17_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts18_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts18_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts19_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts19_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts20_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts20_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts21_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts21_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts22_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts22_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts23_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts23_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts24_+12",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   },
+   {
+    "fileId": "land_cover_ts24_2026110312",
+    "runDateTime": "2026-11-03T12:00:00Z",
+    "run": "12"
+   }
+  ]
+ }
+}
