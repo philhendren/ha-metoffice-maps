@@ -24,6 +24,8 @@ jobs:
       - run: uv run pytest
 
   hacs:
+    # The HACS action can only validate public repositories.
+    if: ${{ !github.event.repository.private }}
     runs-on: ubuntu-24.04
     steps:
       - uses: hacs/action@main
