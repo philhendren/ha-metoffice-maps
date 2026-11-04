@@ -1,0 +1,13 @@
+{
+  "domain": "metoffice_maps",
+  "name": "Met Office Maps",
+  "codeowners": ["@philhendren"],
+  "config_flow": false,
+  "dependencies": ["http"],
+  "documentation": "https://github.com/philhendren/ha-metoffice-maps",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/philhendren/ha-metoffice-maps/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

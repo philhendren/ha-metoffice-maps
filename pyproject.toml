@@ -1,0 +1,57 @@
+[project]
+name = "metoffice-maps"
+version = "0.1.0"
+description = "Met Office Maps: a Home Assistant rain forecast map integration"
+readme = "README.md"
+requires-python = ">=3.14.2"
+license = "MIT"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "pytest-homeassistant-custom-component>=0.13.375",
+  "pytest-bdd>=8",
+  "pytest-cov",
+  "ruff>=0.17",
+]
+
+[tool.uv]
+# A Home Assistant custom component, not an installable Python package.
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+bdd_features_base_dir = "tests/bdd/features"
+addopts = "--cov=custom_components.metoffice_maps --cov-report=term-missing --cov-fail-under=100"
+
+[tool.coverage.run]
+branch = true
+source = ["custom_components/metoffice_maps"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError"]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 100
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "C4", "RUF", "PT", "PL"]
+ignore = [
+  "PLR0911", "PLR0912", "PLR0913", "PLR0915", "PLR2004",  # complexity/magic values
+  "PLC0415",  # local imports are used deliberately in a few tests
+  "RUF001",  # typographic characters in UI strings are intentional
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["custom_components", "tests"]
+force-sort-within-sections = true
+combine-as-imports = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLR2004", "PLR0917", "B018"]
+"scripts/**" = ["T201"]
