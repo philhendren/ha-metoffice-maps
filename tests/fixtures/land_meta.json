@@ -1,0 +1,56 @@
+{
+ "fileDetails": {
+  "file": {
+   "fileId": "land_cover_ts0_+00",
+   "runDateTime": "2026-11-04T00:00:00Z",
+   "run": "00",
+   "region": {
+    "name": "UK model extent",
+    "extent": {
+     "x": {
+      "label": "longitude",
+      "lowerBound": "-25.0",
+      "upperBound": "15.0",
+      "uomLabel": "degree"
+     },
+     "y": {
+      "label": "latitude",
+      "lowerBound": "45.0",
+      "upperBound": "63.0",
+      "uomLabel": "degree"
+     }
+    }
+   },
+   "parameters": [
+    "land_cover"
+   ],
+   "timesteps": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24"
+   ]
+  }
+ }
+}
