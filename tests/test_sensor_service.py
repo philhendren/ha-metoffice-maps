@@ -20,11 +20,11 @@ async def test_sensor_attributes(hass: HomeAssistant, datahub: FakeDataHub) -> N
     assert forecast.attributes["last_error"] is None
     assert forecast.attributes["device_class"] == "timestamp"
     requests = hass.states.get(REQUESTS)
-    assert requests.state == "9"
+    assert requests.state == "8"
     assert requests.attributes == {
         "cap": 800,
         "plan_limit": 1000,
-        "remaining": 791,
+        "remaining": 792,
         "budget_exhausted": False,
         "unit_of_measurement": "requests",
         "icon": "mdi:counter",
@@ -41,7 +41,7 @@ async def test_sensor_before_any_check(hass: HomeAssistant, datahub: FakeDataHub
 async def test_refresh_service_respects_the_budget(
     hass: HomeAssistant, datahub: FakeDataHub
 ) -> None:
-    entry = make_entry(daily_cap=10)
+    entry = make_entry(daily_cap=9)
     await setup_entry(hass, entry)
     datahub.requests.clear()
     await hass.services.async_call("metoffice_maps", "refresh", {}, blocking=True)
@@ -49,7 +49,7 @@ async def test_refresh_service_respects_the_budget(
     await hass.services.async_call(
         "metoffice_maps", "refresh", {"config_entry_id": entry.entry_id}, blocking=True
     )
-    assert datahub.requests == ["listing"]  # the cap of 10 is reached
+    assert datahub.requests == ["listing"]  # the cap of 9 is reached
     assert hass.states.get(REQUESTS).attributes["budget_exhausted"] is True
 
 

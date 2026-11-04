@@ -7,7 +7,7 @@ from typing import Final
 
 DOMAIN: Final = "metoffice_maps"
 NAME: Final = "Met Office Maps"
-VERSION: Final = "0.1.0"
+VERSION: Final = "0.2.0"
 PROJECT_URL: Final = "https://github.com/philhendren/ha-metoffice-maps"
 
 # DataHub Map Images API. Paths from the open-source bolster client, confirmed
@@ -17,7 +17,6 @@ HTTP_TIMEOUT: Final = 30
 
 # Parameters as they appear in fileIds.
 PARAM_PRECIP: Final = "total_precipitation_rate"
-PARAM_LAND: Final = "land_cover"
 
 # Config entry data
 CONF_ORDER_ID: Final = "order_id"
@@ -54,6 +53,8 @@ STARTUP_JITTER_SECONDS: Final = 60
 
 # Rendering
 FRAME_SIZE: Final = 480
+# Bump when the look of rendered frames changes, so frames on disk are redrawn.
+RENDER_VERSION: Final = 2
 KM_PER_DEGREE: Final = 111.32
 
 # Storage

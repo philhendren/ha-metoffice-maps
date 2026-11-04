@@ -75,6 +75,19 @@ class FrameGeometry:
         y = (e.north - lat) / (e.north - e.south) * self.height
         return x, y
 
+    def box_extent(self, box: tuple[int, int, int, int]) -> Extent:
+        """Return the longitude/latitude bounds of a pixel box (it may reach past the image)."""
+        e = self.extent
+        left, top, right, bottom = box
+        lon = (e.east - e.west) / self.width
+        lat = (e.north - e.south) / self.height
+        return Extent(
+            west=e.west + left * lon,
+            east=e.west + right * lon,
+            south=e.north - bottom * lat,
+            north=e.north - top * lat,
+        )
+
     def crop_box(self, lat: float, lon: float, radius_km: float) -> tuple[int, int, int, int]:
         """Return the (left, top, right, bottom) box `radius_km` around a point.
 

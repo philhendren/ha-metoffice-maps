@@ -5,8 +5,8 @@ A Home Assistant custom integration that turns a Met Office DataHub
 around your home.
 
 Home Assistant fetches the frames itself, server-side and within the free
-plan's daily request budget. It crops them around home, adds a coastline and
-a home marker, and serves finished PNGs. Dashboards only load those images.
+plan's daily request budget. It crops them around home, smooths the rain, adds
+a coastline and a home marker, and serves finished PNGs. Dashboards only load those images.
 **The API key never leaves Home Assistant.**
 
 > Status: v1, under review. The dashboard player is a separate piece of work.
@@ -17,7 +17,8 @@ a home marker, and serves finished PNGs. Dashboards only load those images.
    allows 1,000 requests a day, reset at 00:00 UTC).
 2. A Map Images **order** with:
    - region: UK
-   - parameters: total precipitation rate, plus **land cover** (for the coastline)
+   - parameters: total precipitation rate (land cover is not needed: the coastline is
+     bundled)
    - steps: hourly, covering at least the next 6 hours
    - model runs: all
 3. The order ID. The portal shows it as `O123456789012`; the API wants
@@ -61,6 +62,19 @@ budget like any other check.
 | Daily request cap | 800 | Up to 950. At the cap, polling stops until 00:00 UTC and the last frames stay on show |
 | Check every | 15 min | Each check is one request |
 
+## How frames are drawn
+
+- **Rain** keeps the Met Office colours. Each source pixel covers about 3 km, so
+  a 150 km frame is about five times larger than the area it crops. The rain is
+  scaled with a bicubic filter and softened by 0.8 of a source pixel, so the
+  pixel steps don't show (`SOFTEN` in `render.py`).
+- **Land and coastline** come from Natural Earth 1:10m land polygons (public
+  domain), bundled in `custom_components/metoffice_maps/data/land.json`. They
+  are drawn at four times the frame size and scaled down, so the coast is smooth
+  and anti-aliased at any radius. `scripts/build_coastline.py` rebuilds the file.
+- After an update that changes how frames look, the frames on disk are redrawn
+  from the downloads, with no extra requests.
+
 ## Request budget
 
 | What | When | Requests a day |
@@ -68,7 +82,7 @@ budget like any other check.
 | Check the order's latest listing | Every 15 minutes | 96 |
 | Download frames for a new run | When a new run is published (twice a day in Phase 0) | up to 6 each |
 | Download the next hour's frame | Once an hour, as the window moves | about 24 |
-| Metadata and land cover | Once, then cached | about 0 |
+| Metadata (map bounds) | Once, then cached | about 0 |
 | **Typical total** | | **about 130** |
 
 The rules the code enforces:
@@ -95,6 +109,8 @@ git-ignored. Run on 4 November 2026, it settled:
   known land and sea points.
 - **Images**: 800 × 800, palette PNGs already coloured with the Met Office rain
   scale; no rain is fully transparent. The integration keeps those colours.
+  The land cover image at this size gave a blocky coast (3 km steps), so since
+  0.2.0 the coast comes from bundled vector data instead.
 - **Runs**: 00Z and 12Z, each listed with dated file IDs
   (`total_precipitation_rate_ts3_2026110400`) and aliases (`…_ts3_+00`).
 
@@ -110,4 +126,5 @@ Plain-English behaviour specs live in `tests/bdd/features/`.
 
 ## Licence
 
-MIT. Not affiliated with or endorsed by the Met Office.
+MIT. Not affiliated with or endorsed by the Met Office. Coastline data: Natural
+Earth (public domain), https://www.naturalearthdata.com.

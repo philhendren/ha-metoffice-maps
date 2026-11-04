@@ -21,6 +21,7 @@ from homeassistant.util import dt as dt_util
 
 from .api import ApiError, AuthError, MapImagesClient, NotFound, RateLimited
 from .budget import BudgetExhausted
+from .coast import coast_layers, load_land
 from .const import (
     CONF_FRAMES,
     CONF_LATITUDE,
@@ -39,11 +40,12 @@ from .const import (
     ERROR_RATE_LIMITED,
     FRAME_SIZE,
     MAX_BACKOFF,
+    RENDER_VERSION,
 )
 from .files import MapFile, Selection, listing_summary, parse_listing, select_frames
 from .geometry import Extent, FrameGeometry, GeometryError
 from .models import ForecastData, Frame
-from .render import image_size, render_frame
+from .render import Layers, image_size, render_frame
 from .storage import FrameFiles, OrderState
 
 if TYPE_CHECKING:
@@ -92,7 +94,10 @@ class MetOfficeMapsCoordinator(DataUpdateCoordinator[ForecastData]):
     @property
     def render_key(self) -> str:
         """Return what rendered frames depend on, besides the downloads."""
-        return f"{self.latitude:.4f},{self.longitude:.4f},{self.radius_km:g},{FRAME_SIZE}"
+        return (
+            f"{self.latitude:.4f},{self.longitude:.4f},{self.radius_km:g},"
+            f"{FRAME_SIZE},v{RENDER_VERSION}"
+        )
 
     @property
     def issue_id(self) -> str:
@@ -213,11 +218,7 @@ class MetOfficeMapsCoordinator(DataUpdateCoordinator[ForecastData]):
             if not await self.hass.async_add_executor_job(has_raw, item.file_id)
         ]
         need_extent = "extent" not in self.state.data
-        land_on_disk = await self.hass.async_add_executor_job(self.files.read_land)
-        need_land = selection.land is not None and (
-            land_on_disk is None or self.state.data.get("land_stale", False)
-        )
-        cost = len(missing) + need_extent + need_land
+        cost = len(missing) + need_extent
         if not self.budget.can_spend(cost):
             _LOGGER.info("Skipping run: %s requests would cross the daily cap", cost)
             self._last_error = ERROR_BUDGET_RESERVED
@@ -233,12 +234,6 @@ class MetOfficeMapsCoordinator(DataUpdateCoordinator[ForecastData]):
                 self._last_error = ERROR_INCOMPLETE
                 return False
             await self.hass.async_add_executor_job(self.files.write_raw, item.file_id, data)
-        if need_land:
-            assert selection.land is not None
-            land = await self.client.file_data(selection.land.file_id)
-            await self.hass.async_add_executor_job(self.files.write_land, land)
-            self.state.data["land_stale"] = False
-            await self.hass.async_add_executor_job(self.files.clear_frames)
         return True
 
     async def _publish(self, frames: list[MapFile]) -> None:
@@ -265,7 +260,8 @@ class MetOfficeMapsCoordinator(DataUpdateCoordinator[ForecastData]):
 
     def _render(self, file_ids: list[str], force: bool) -> None:
         extent = Extent(**self.state.data["extent"])
-        land = self.files.read_land()
+        land = load_land()
+        coasts: dict[tuple[int, int, int, int], Layers] = {}
         for file_id in file_ids:
             if not force and self.files.has_frame(file_id):
                 continue
@@ -273,13 +269,10 @@ class MetOfficeMapsCoordinator(DataUpdateCoordinator[ForecastData]):
             size = image_size(raw)
             geometry = FrameGeometry(extent, *size)
             box = geometry.crop_box(self.latitude, self.longitude, self.radius_km)
-            coast = land
-            if land is not None and image_size(land) != size:
-                # Land cover no longer matches: render without it, fetch it again next time.
-                self.state.data["land_stale"] = True
-                coast = None
+            if box not in coasts:
+                coasts[box] = coast_layers(land, geometry.box_extent(box), FRAME_SIZE)
             marker = _marker(geometry, box, self.latitude, self.longitude)
-            self.files.write_frame(file_id, render_frame(raw, box, FRAME_SIZE, coast, marker))
+            self.files.write_frame(file_id, render_frame(raw, box, FRAME_SIZE, coasts[box], marker))
 
     # Diagnostics --------------------------------------------------------------
     def diagnostics(self) -> dict[str, Any]:

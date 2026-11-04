@@ -19,7 +19,7 @@ async def test_diagnostics_redact_the_key(hass: HomeAssistant, datahub: FakeData
     diag = await async_get_config_entry_diagnostics(hass, entry)
     assert diag["entry"]["data"]["api_key"] == "**REDACTED**"
     assert diag["entry"]["data"]["order_id"] == "o000000000001"
-    assert diag["budget"] == {"used": 9, "cap": 800, "remaining": 791, "exhausted": False}
+    assert diag["budget"] == {"used": 8, "cap": 800, "remaining": 792, "exhausted": False}
     coordinator = diag["coordinator"]
     assert coordinator["listing"]["runs"] == [
         "2026-11-03T12:00:00+00:00",
