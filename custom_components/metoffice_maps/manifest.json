@@ -2,7 +2,7 @@
   "domain": "metoffice_maps",
   "name": "Met Office Maps",
   "codeowners": ["@philhendren"],
-  "config_flow": false,
+  "config_flow": true,
   "dependencies": ["http"],
   "documentation": "https://github.com/philhendren/ha-metoffice-maps",
   "integration_type": "service",
