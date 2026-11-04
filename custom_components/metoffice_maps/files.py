@@ -14,7 +14,7 @@ from datetime import UTC, datetime, timedelta
 import re
 from typing import Any
 
-from .const import PARAM_LAND, PARAM_PRECIP
+from .const import PARAM_PRECIP
 
 FILE_ID = re.compile(r"^(?P<parameter>[a-z0-9_]+?)_ts(?P<step>\d+)_(?P<run>\d{10})$")
 
@@ -36,11 +36,10 @@ class MapFile:
 
 @dataclass(slots=True, frozen=True)
 class Selection:
-    """The frames to show and the land cover file to use for the coastline."""
+    """The frames to show."""
 
     run: datetime
     frames: list[MapFile]
-    land: MapFile | None
 
 
 def parse_file_id(file_id: str) -> MapFile | None:
@@ -71,17 +70,12 @@ def select_frames(files: list[MapFile], now: datetime, count: int) -> Selection 
     for item in files:
         if item.parameter == PARAM_PRECIP:
             runs[item.run].append(item)
-    land = max(
-        (item for item in files if item.parameter == PARAM_LAND),
-        key=lambda item: (item.run, -item.step),
-        default=None,
-    )
     for run in sorted(runs, reverse=True):
         upcoming = sorted(
             (item for item in runs[run] if item.valid_time > now), key=lambda item: item.step
         )
         if len(upcoming) >= count:
-            return Selection(run, upcoming[:count], land)
+            return Selection(run, upcoming[:count])
     return None
 
 

@@ -3,24 +3,25 @@
 Phase 0 found the precipitation images are already coloured: a 32-entry
 palette of Met Office rain colours with per-entry transparency, where no rain
 is fully transparent. So the renderer keeps those colours and only crops,
-scales and composites. The land_cover image is a green land mask on a
-transparent sea; it becomes a faint land tint and a coastline outline.
+scales and composites. Each source pixel covers about 3 km, so a frame is
+several times larger than the crop: the rain is scaled with a bicubic filter
+and softened by about half a source pixel so the steps don't show. The land
+tint and coastline come from `coast.py`.
 """
 
 from __future__ import annotations
 
 import io
 
-from PIL import Image, ImageChops, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 
-LAND_TINT = (255, 255, 255, 22)
-COAST_COLOUR = (255, 255, 255, 150)
 MARKER_RING = (255, 255, 255, 255)
 MARKER_EDGE = (20, 20, 20, 255)
 MARKER_RADIUS = 6
-LAND_THRESHOLD = 128
+SOFTEN = 0.8  # blur radius, in source pixels
 
 Box = tuple[int, int, int, int]
+Layers = tuple[Image.Image, Image.Image]
 
 
 def image_size(data: bytes) -> tuple[int, int]:
@@ -29,47 +30,34 @@ def image_size(data: bytes) -> tuple[int, int]:
         return img.size
 
 
-def _crop_scale(data: bytes, box: Box, size: int) -> Image.Image:
-    """Crop to the box (transparent outside the image) and scale to size x size."""
+def scale_rain(data: bytes, box: Box, size: int) -> Image.Image:
+    """Crop to the box (transparent outside the image) and scale smoothly to size x size."""
     with Image.open(io.BytesIO(data)) as img:
         rgba = img.convert("RGBA")
-    # Resize premultiplied so transparent pixels don't bleed dark fringes.
+    # Work premultiplied so transparent pixels don't bleed dark fringes.
     cropped = rgba.crop(box).convert("RGBa")
-    return cropped.resize((size, size), Image.Resampling.BILINEAR).convert("RGBA")
-
-
-def coast_layers(land: bytes, box: Box, size: int) -> tuple[Image.Image, Image.Image]:
-    """Return two transparent layers: a faint land tint and the coastline outline."""
-    mask = (
-        _crop_scale(land, box, size)
-        .getchannel("A")
-        .point(lambda a: 255 if a >= LAND_THRESHOLD else 0)
-    )
-    edge = ImageChops.subtract(
-        mask.filter(ImageFilter.MaxFilter(3)), mask.filter(ImageFilter.MinFilter(3))
-    )
-    blank = (0, 0, 0, 0)
-    tint = Image.new("RGBA", (size, size), blank)
-    tint.paste(Image.new("RGBA", (size, size), LAND_TINT), mask=mask)
-    outline = Image.new("RGBA", (size, size), blank)
-    outline.paste(Image.new("RGBA", (size, size), COAST_COLOUR), mask=edge)
-    return tint, outline
+    scaled = cropped.resize((size, size), Image.Resampling.BICUBIC)
+    left, top, right, bottom = box
+    zoom = size / ((right - left + bottom - top) / 2)
+    if zoom > 1:
+        scaled = scaled.filter(ImageFilter.GaussianBlur(SOFTEN * zoom))
+    return scaled.convert("RGBA")
 
 
 def render_frame(
     precip: bytes,
     box: Box,
     size: int,
-    land: bytes | None = None,
+    coast: Layers | None = None,
     marker: tuple[float, float] | None = None,
 ) -> bytes:
     """Return a size x size transparent PNG: land, rain, coastline, home marker."""
     frame = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-    rain = _crop_scale(precip, box, size)
-    if land is None:
+    rain = scale_rain(precip, box, size)
+    if coast is None:
         frame.alpha_composite(rain)
     else:
-        tint, outline = coast_layers(land, box, size)
+        tint, outline = coast
         frame.alpha_composite(tint)
         frame.alpha_composite(rain)
         frame.alpha_composite(outline)

@@ -12,15 +12,15 @@ from homeassistant.helpers import issue_registry as ir
 from pytest_homeassistant_custom_component.common import async_fire_time_changed
 
 from custom_components.metoffice_maps.budget import BudgetExhausted
-from custom_components.metoffice_maps.const import DOMAIN, PARAM_LAND, PARAM_PRECIP
+from custom_components.metoffice_maps.const import DOMAIN, PARAM_PRECIP
 from custom_components.metoffice_maps.storage import FrameFiles
 
 from .helpers import (
+    PARAM_LAND,
     RUN_NOW,
     FakeDataHub,
     file_id,
     frame_ids,
-    land_png,
     make_entry,
     precip_png,
     setup_entry,
@@ -49,12 +49,12 @@ async def test_first_setup_downloads_one_run(hass: HomeAssistant, datahub: FakeD
     entry = make_entry()
     await setup_entry(hass, entry)
     assert entry.state is ConfigEntryState.LOADED
-    # 1 listing + 1 metadata (for the extent) + 6 frames + 1 land cover.
+    # 1 listing + 1 metadata (for the extent) + 6 frames. The coastline is bundled,
+    # so the order's land cover is never downloaded.
     assert datahub.requests == [
         "listing",
         f"meta:{frame_ids()[0]}",
         *(f"data:{fid}" for fid in frame_ids()),
-        f"data:{file_id(PARAM_LAND, 0, RUN_NOW)}",
     ]
     assert shown(hass, entry) == frame_ids()
     state = hass.states.get(FORECAST)
@@ -65,7 +65,7 @@ async def test_first_setup_downloads_one_run(hass: HomeAssistant, datahub: FakeD
     assert frames[0]["url"].startswith(
         f"/api/metoffice_maps/{entry.entry_id}/frame/11.png?authSig="
     )
-    assert hass.states.get(REQUESTS).state == "9"
+    assert hass.states.get(REQUESTS).state == "8"
     files = FrameFiles.for_entry(hass, entry.entry_id)
     assert all(files.has_frame(fid) for fid in frame_ids())
 
@@ -225,16 +225,16 @@ async def test_missing_order_later_raises_a_repair_and_stops(
 async def test_cap_stops_calls_and_keeps_frames(
     hass: HomeAssistant, datahub: FakeDataHub, now: FrozenDateTimeFactory
 ) -> None:
-    entry = make_entry(daily_cap=10)
+    entry = make_entry(daily_cap=9)
     await setup_entry(hass, entry)
-    await tick(hass, now, 15)  # 10th request
+    await tick(hass, now, 15)  # 9th request
     datahub.requests.clear()
     await tick(hass, now, 15)
     await tick(hass, now, 15)
     assert datahub.requests == []
     assert last_error(entry) == "budget_exhausted"
     state = hass.states.get(REQUESTS)
-    assert state.state == "10"
+    assert state.state == "9"
     assert state.attributes["budget_exhausted"] is True
     assert state.attributes["remaining"] == 0
     assert shown(hass, entry) == frame_ids()
@@ -297,26 +297,15 @@ async def test_bad_metadata(hass: HomeAssistant, datahub: FakeDataHub) -> None:
     assert shown(hass, entry) == []
 
 
-async def test_order_without_land_cover(hass: HomeAssistant, datahub: FakeDataHub) -> None:
-    datahub.with_land = False
-    entry = make_entry()
-    await setup_entry(hass, entry)
-    assert not any(path.startswith(f"data:{PARAM_LAND}") for path in datahub.requests)
-    assert shown(hass, entry) == frame_ids()
-
-
-async def test_land_cover_refetched_when_the_size_changes(
+async def test_land_cover_is_never_downloaded(
     hass: HomeAssistant, datahub: FakeDataHub, now: FrozenDateTimeFactory
 ) -> None:
-    datahub.land = land_png(size=(400, 400))
     entry = make_entry()
     await setup_entry(hass, entry)
-    datahub.land = land_png()
-    datahub.requests.clear()
     await tick(hass, now, 15)
-    assert datahub.requests == ["listing", f"data:{file_id(PARAM_LAND, 0, RUN_NOW)}"]
-    await tick(hass, now, 15)
-    assert datahub.requests[-1] == "listing"
+    assert not any(path.startswith(f"data:{PARAM_LAND}") for path in datahub.requests)
+    assert file_id(PARAM_LAND, 0, RUN_NOW) in str(datahub.listing())
+    assert shown(hass, entry) == frame_ids()
 
 
 async def test_restart_serves_frames_on_disk_then_polls_after_jitter(
@@ -349,6 +338,27 @@ async def test_changed_options_rerender_without_calls(
     await hass.async_block_till_done(wait_background_tasks=True)
     assert datahub.requests == []
     assert files.read_frame(frame_ids()[0]) != before
+    assert shown(hass, entry) == frame_ids()
+
+
+async def test_new_render_version_redraws_frames_without_calls(
+    hass: HomeAssistant, datahub: FakeDataHub
+) -> None:
+    """After an update that changes how frames look, frames on disk are drawn again."""
+    entry = make_entry()
+    await setup_entry(hass, entry)
+    files = FrameFiles.for_entry(hass, entry.entry_id)
+    before = files.read_frame(frame_ids()[0])
+    datahub.requests.clear()
+    with patch("custom_components.metoffice_maps.coordinator.RENDER_VERSION", 99):
+        await hass.config_entries.async_reload(entry.entry_id)
+        await hass.async_block_till_done(wait_background_tasks=True)
+        coordinator = entry.runtime_data.coordinator
+        assert coordinator.render_key.endswith(",v99")
+        assert coordinator.state.data["render_key"] == coordinator.render_key
+    assert datahub.requests == []
+    assert files.read_frame(frame_ids()[0]) is not None
+    assert before is not None
     assert shown(hass, entry) == frame_ids()
 
 

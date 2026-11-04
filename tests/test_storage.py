@@ -24,3 +24,10 @@ def test_file_names_are_safe(tmp_path: Path) -> None:
     files.write_raw("land_cover_ts0_+00", b"x")
     assert (tmp_path / "raw" / "land_cover_ts0_plus00.png").read_bytes() == b"x"
     assert files.read_frame("missing") is None
+
+
+def test_land_cover_from_version_0_1_is_removed(tmp_path: Path) -> None:
+    files = storage.FrameFiles(tmp_path)
+    (tmp_path / storage.OLD_LAND_FILE).write_bytes(b"old")
+    files.ensure()
+    assert not (tmp_path / storage.OLD_LAND_FILE).exists()

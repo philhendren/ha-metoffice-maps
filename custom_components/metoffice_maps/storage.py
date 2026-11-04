@@ -16,7 +16,8 @@ from homeassistant.helpers.storage import Store
 
 from .const import DOMAIN, STATE_KEY, STORAGE_VERSION
 
-LAND_FILE = "land_cover.png"
+# Left by version 0.1.0, which drew the coast from the model's land mask.
+OLD_LAND_FILE = "land_cover.png"
 
 
 def frame_root(hass: HomeAssistant) -> Path:
@@ -46,6 +47,7 @@ class FrameFiles:
         """Create the directories."""
         self.raw.mkdir(parents=True, exist_ok=True)
         self.frames.mkdir(parents=True, exist_ok=True)
+        (self.root / OLD_LAND_FILE).unlink(missing_ok=True)
 
     def has_raw(self, file_id: str) -> bool:
         """Return True if the download is on disk."""
@@ -58,15 +60,6 @@ class FrameFiles:
     def write_raw(self, file_id: str, data: bytes) -> None:
         """Save a download."""
         (self.raw / _safe(file_id)).write_bytes(data)
-
-    def read_land(self) -> bytes | None:
-        """Return the land cover image, if downloaded."""
-        path = self.root / LAND_FILE
-        return path.read_bytes() if path.is_file() else None
-
-    def write_land(self, data: bytes) -> None:
-        """Save the land cover image."""
-        (self.root / LAND_FILE).write_bytes(data)
 
     def has_frame(self, file_id: str) -> bool:
         """Return True if the rendered frame is on disk."""

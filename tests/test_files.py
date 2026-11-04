@@ -80,8 +80,6 @@ def test_select_next_hours_from_newest_run() -> None:
     assert selection.run == RUN_NOW
     # 10:05 now: the next six whole hours are 11:00 to 16:00, steps 11 to 16.
     assert [item.step for item in selection.frames] == [11, 12, 13, 14, 15, 16]
-    assert selection.land is not None
-    assert selection.land.file_id == "land_cover_ts0_2026110400"
 
 
 def test_select_falls_back_to_older_complete_run() -> None:
@@ -92,7 +90,6 @@ def test_select_falls_back_to_older_complete_run() -> None:
     assert selection.run == RUN_PREV
     assert [item.step for item in selection.frames] == [23, 24, 25, 26, 27, 28]
     assert [item.valid_time.hour for item in selection.frames] == [11, 12, 13, 14, 15, 16]
-    assert selection.land is None
 
 
 def test_select_none_when_no_run_covers_the_hours() -> None:

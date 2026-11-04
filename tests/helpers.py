@@ -31,7 +31,6 @@ from custom_components.metoffice_maps.const import (
     CONF_ORDER_ID,
     DEFAULT_OPTIONS,
     DOMAIN,
-    PARAM_LAND,
     PARAM_PRECIP,
 )
 
@@ -44,11 +43,12 @@ SIZE = (800, 800)
 RUN_PREV = datetime(2026, 11, 3, 12, tzinfo=UTC)
 RUN_NOW = datetime(2026, 11, 4, 0, tzinfo=UTC)
 NOW = datetime(2026, 11, 4, 10, 5, tzinfo=UTC)
+# Real orders also list the model's land cover; the integration no longer downloads it.
+PARAM_LAND = "land_cover"
 
 # Rain palette: index 0 is "no rain" (fully transparent), like the real images.
 RAIN_LIGHT = (153, 254, 255)
 RAIN_HEAVY = (0, 86, 255)
-LAND_GREEN = (0, 255, 0)
 
 
 def load_fixture(name: str) -> Any:
@@ -86,16 +86,6 @@ def precip_png(
     return out.getvalue()
 
 
-def land_png(coast_x: int = HOME_PIXEL[0] + 40, size: tuple[int, int] = SIZE) -> bytes:
-    """Return a land mask: land west of `coast_x`, sea to the east."""
-    img = Image.new("P", size, 0)
-    img.putpalette([0, 0, 0, *LAND_GREEN] + [0] * 254 * 3)
-    img.paste(1, (0, 0, coast_x, size[1]))
-    out = io.BytesIO()
-    img.save(out, format="PNG", transparency=bytes([0, 254]))
-    return out.getvalue()
-
-
 class FakeDataHub:
     """A scripted DataHub Map Images API behind AiohttpClientMocker.
 
@@ -110,13 +100,11 @@ class FakeDataHub:
         self.mock = aioclient_mock
         self.runs = [RUN_PREV, RUN_NOW]
         self.steps = list(range(25))
-        self.with_land = True
         self.missing: set[str] = set()
         self.fail_next: list[int | BaseException] = []
         self.fail_always: int | BaseException | None = None
         self.requests: list[str] = []
         self.precip = precip_png()
-        self.land = land_png()
         self.meta = load_fixture("precip_meta.json")
         aioclient_mock.get(re.compile(re.escape(API_BASE)), side_effect=self._handle)
 
@@ -140,8 +128,7 @@ class FakeDataHub:
         """Return a listing in the shape Phase 0 recorded."""
         files = []
         for run in self.runs:
-            params = [PARAM_PRECIP, "cloud_amount_total"] + ([PARAM_LAND] if self.with_land else [])
-            for parameter in params:
+            for parameter in (PARAM_PRECIP, "cloud_amount_total", PARAM_LAND):
                 for step in self.steps:
                     for fid in (file_id(parameter, step, run), f"{parameter}_ts{step}_+{run:%H}"):
                         files.append(
@@ -171,9 +158,8 @@ class FakeDataHub:
             return AiohttpClientMockResponse(method, url, json=self.listing())
         if rest[1:] != ["data"]:
             return AiohttpClientMockResponse(method, url, json=self.meta)
-        body = self.land if rest[0].startswith(PARAM_LAND) else self.precip
         return AiohttpClientMockResponse(
-            method, url, response=body, headers={"Content-Type": "image/png"}
+            method, url, response=self.precip, headers={"Content-Type": "image/png"}
         )
 
 

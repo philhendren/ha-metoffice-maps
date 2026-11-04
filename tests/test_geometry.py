@@ -19,6 +19,16 @@ def test_extent_from_real_metadata() -> None:
     assert UK.as_dict() == {"west": -25.0, "east": 15.0, "south": 45.0, "north": 63.0}
 
 
+def test_box_extent_round_trips_the_crop_box() -> None:
+    geometry = FrameGeometry(UK, 800, 800)
+    view = geometry.box_extent(geometry.crop_box(*HOME, 150))
+    assert (view.west + view.east) / 2 == pytest.approx(HOME[1], abs=0.05)
+    assert (view.south + view.north) / 2 == pytest.approx(HOME[0], abs=0.05)
+    # 300 km tall and wide.
+    assert (view.north - view.south) * 111.32 == pytest.approx(300, rel=0.02)
+    assert geometry.box_extent((0, 0, 800, 800)) == UK
+
+
 def broken(path: list[str], value: object) -> dict:
     meta = copy.deepcopy(load_fixture("precip_meta.json"))
     target = meta["fileDetails"]["file"]["region"]["extent"]

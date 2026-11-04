@@ -6,16 +6,11 @@ import io
 
 from PIL import Image
 
+from custom_components.metoffice_maps.coast import LAND_TINT, Polygon, coast_layers
 from custom_components.metoffice_maps.geometry import Extent, FrameGeometry
-from custom_components.metoffice_maps.render import (
-    COAST_COLOUR,
-    LAND_TINT,
-    coast_layers,
-    image_size,
-    render_frame,
-)
+from custom_components.metoffice_maps.render import image_size, render_frame, scale_rain
 
-from .helpers import HOME, HOME_PIXEL, RAIN_HEAVY, RAIN_LIGHT, land_png, precip_png
+from .helpers import HOME, HOME_PIXEL, RAIN_HEAVY, RAIN_LIGHT, precip_png
 
 UK = Extent(-25.0, 15.0, 45.0, 63.0)
 SIZE = 240
@@ -64,27 +59,41 @@ def test_outside_the_model_extent_is_transparent() -> None:
     assert same_colour(img.getpixel((SIZE - 2, SIZE - 2)), (*RAIN_LIGHT, 254))
 
 
-def test_coastline_and_land_tint() -> None:
-    tint, outline = coast_layers(land_png(), BOX, SIZE)
-    # The fake coast runs north-south 40 px east of home.
-    left, _, right, _ = BOX
-    coast_x = round((HOME_PIXEL[0] + 40 - left) / (right - left) * SIZE)
-    row = SIZE // 2
-    assert tint.getpixel((5, row)) == LAND_TINT
-    assert tint.getpixel((SIZE - 5, row)) == (0, 0, 0, 0)
-    edge = [x for x in range(SIZE) if outline.getpixel((x, row))[3]]
-    assert edge
-    assert min(edge) >= coast_x - 3
-    assert max(edge) <= coast_x + 3
-    assert outline.getpixel((edge[0], row)) == COAST_COLOUR
+def test_rain_edges_are_smoothed_not_stepped() -> None:
+    """A rain patch fades over a few pixels at its edge instead of a hard step."""
+    x, y = HOME_PIXEL
+    data = precip_png([((x - 30, y - 30, x + 30, y + 30), 2)])
+    rain = scale_rain(data, BOX, SIZE)
+    row = [rain.getpixel((px, SIZE // 2))[3] for px in range(SIZE)]
+    partial = [a for a in row if 0 < a < 250]
+    assert len(partial) >= 4  # a soft edge on each side
+    assert max(row) >= 253
+
+
+def test_no_softening_when_the_frame_is_smaller_than_the_crop() -> None:
+    x, y = HOME_PIXEL
+    data = precip_png([((x - 30, y - 30, x + 30, y + 30), 2)])
+    rain = scale_rain(data, BOX, 40)
+    assert rain.size == (40, 40)
+    assert same_colour(rain.getpixel((20, 20)), (*RAIN_HEAVY, 254))
+
+
+def east_of(lon: float) -> tuple[Polygon, ...]:
+    """A land square from the view's west edge to `lon`, with sea to the east."""
+    ring = [(-10.0, 40.0), (lon, 40.0), (lon, 60.0), (-10.0, 60.0), (-10.0, 40.0)]
+    return (Polygon([ring], [ring], (-10.0, 40.0, lon, 60.0)),)
 
 
 def test_frame_layers_coastline_over_rain_and_marker_on_top() -> None:
     x, y = HOME_PIXEL
-    data = precip_png([((x + 20, y - 60, x + 60, y + 60), 2)])  # rain over the coast
-    img = open_png(render_frame(data, BOX, SIZE, land_png(), (SIZE / 2, SIZE / 2)))
+    view = FrameGeometry(UK, 800, 800).box_extent(BOX)
     left, _, right, _ = BOX
+    # The coast runs north-south 40 source pixels east of home, inside the rain patch.
     coast_x = round((x + 40 - left) / (right - left) * SIZE)
+    coast_lon = view.west + coast_x / SIZE * (view.east - view.west)
+    data = precip_png([((x + 20, y - 60, x + 80, y + 60), 2)])  # rain over the coast
+    layers = coast_layers(east_of(coast_lon), view, SIZE)
+    img = open_png(render_frame(data, BOX, SIZE, layers, (SIZE / 2, SIZE / 2)))
     row = SIZE // 2 + 30
     edge = [
         px
