@@ -1,0 +1,14 @@
+{
+  "entity": {
+    "sensor": {
+      "forecast": {
+        "default": "mdi:weather-pouring"
+      }
+    }
+  },
+  "services": {
+    "refresh": {
+      "service": "mdi:refresh"
+    }
+  }
+}

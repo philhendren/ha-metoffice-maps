@@ -1,0 +1,89 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Met Office Maps",
+        "description": "Connect a Met Office DataHub Map Images order. You'll find the key and the order ID in the [DataHub portal]({datahub_url}). Checking them uses one of today's requests.",
+        "data": {
+          "api_key": "API key",
+          "order_id": "Order ID"
+        },
+        "data_description": {
+          "api_key": "Stored only in Home Assistant. It is never sent to your dashboards.",
+          "order_id": "For example o123456789012. Capital letters are fine: it is converted to lower case."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Update the API key",
+        "description": "The Met Office rejected the key for order {order_id}. Enter a new one. Checking it uses one of today's requests.",
+        "data": {
+          "api_key": "API key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "The Met Office rejected this API key.",
+      "order_not_found": "No order with this ID was found for this key.",
+      "cannot_connect": "Couldn't reach the Met Office DataHub. Try again later.",
+      "budget_exhausted": "Today's request budget for this order is used up. Try again after midnight UTC."
+    },
+    "abort": {
+      "already_configured": "This order is already set up.",
+      "reauth_successful": "The API key has been updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Map and budget",
+        "data": {
+          "latitude": "Centre latitude",
+          "longitude": "Centre longitude",
+          "radius_km": "Radius around the centre",
+          "frames": "Forecast frames (hours ahead)",
+          "daily_cap": "Daily request cap",
+          "poll_minutes": "Check for new runs every"
+        },
+        "data_description": {
+          "latitude": "Defaults to your home location.",
+          "longitude": "Defaults to your home location.",
+          "daily_cap": "The free plan allows 1,000 requests a day, reset at 00:00 UTC. At the cap, polling stops and the last frames stay on show.",
+          "poll_minutes": "Each check uses one request. New frames use one request each."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "forecast": {
+        "name": "Rain forecast"
+      },
+      "requests_today": {
+        "name": "Requests today"
+      }
+    }
+  },
+  "issues": {
+    "order_not_found": {
+      "title": "Met Office order not found",
+      "description": "The Met Office no longer recognises the order for {title}. Polling has stopped. Check the order in the DataHub portal, then reload the integration or set it up again."
+    }
+  },
+  "exceptions": {
+    "entry_not_loaded": {
+      "message": "That Met Office Maps entry is not loaded."
+    }
+  },
+  "services": {
+    "refresh": {
+      "name": "Refresh",
+      "description": "Check for new forecast frames now. Uses the daily request budget like any other check.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Order",
+          "description": "Only refresh this order. Leave empty to refresh all of them."
+        }
+      }
+    }
+  }
+}
