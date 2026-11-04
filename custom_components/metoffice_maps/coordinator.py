@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryError
@@ -280,6 +280,20 @@ class MetOfficeMapsCoordinator(DataUpdateCoordinator[ForecastData]):
                 coast = None
             marker = _marker(geometry, box, self.latitude, self.longitude)
             self.files.write_frame(file_id, render_frame(raw, box, FRAME_SIZE, coast, marker))
+
+    # Diagnostics --------------------------------------------------------------
+    def diagnostics(self) -> dict[str, Any]:
+        """Return a summary for diagnostics (no key)."""
+        return {
+            "frames": [frame.as_state() for frame in self._snapshot().frames],
+            "listing": self.state.data.get("listing"),
+            "extent": self.state.data.get("extent"),
+            "render_key": self.state.data.get("render_key"),
+            "backoff_level": self.backoff_level,
+            "update_interval": str(self.update_interval),
+            "halted": self.halted,
+            "last_error": self._last_error,
+        }
 
 
 def _marker(
