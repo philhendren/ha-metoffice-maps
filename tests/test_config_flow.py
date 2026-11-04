@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from homeassistant.config_entries import SOURCE_USER
+from homeassistant.config_entries import SOURCE_USER, ConfigEntryState
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
 import pytest
@@ -132,3 +132,7 @@ async def test_reauth(hass: HomeAssistant, datahub: FakeDataHub) -> None:
     assert result["type"] is FlowResultType.ABORT
     assert result["reason"] == "reauth_successful"
     assert entry.data["api_key"] == "new-key"
+    # The entry reloads in the background; let it finish inside the test.
+    await hass.async_block_till_done(wait_background_tasks=True)
+    assert entry.state is ConfigEntryState.LOADED
+    assert entry.runtime_data.coordinator.client._api_key == "new-key"
